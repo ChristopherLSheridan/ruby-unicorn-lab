@@ -1,0 +1,15 @@
+[Unit]
+Description=Ruby Unicorn SRE Lab
+After=network.target
+
+[Service]
+Type=simple
+User=christopher
+Group=christopher
+WorkingDirectory=/home/christopher/projects/ruby-unicorn-lab
+ExecStart=/usr/bin/bash -lc 'exec /usr/bin/bundle exec unicorn -c /dev/null -l 127.0.0.1:3000 app/config.ru'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
