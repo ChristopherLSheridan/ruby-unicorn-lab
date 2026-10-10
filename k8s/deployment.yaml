@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ruby-unicorn
+  namespace: ruby-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ruby-unicorn
+  template:
+    metadata:
+      labels:
+        app: ruby-unicorn
+    spec:
+      containers:
+        - name: unicorn
+          image: ruby-unicorn-lab:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
