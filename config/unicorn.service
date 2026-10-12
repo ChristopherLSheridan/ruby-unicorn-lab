@@ -5,9 +5,12 @@ After=network.target
 [Service]
 Type=simple
 User=christopher
-Group=christopher
+Group=www-data
 WorkingDirectory=/home/christopher/projects/ruby-unicorn-lab
-ExecStart=/usr/bin/bash -lc 'exec /usr/bin/bundle exec unicorn -c /dev/null -l 127.0.0.1:3000 app/config.ru'
+RuntimeDirectory=unicorn-lab
+RuntimeDirectoryMode=0755
+UMask=0007
+ExecStart=/usr/bin/bash -lc 'exec /usr/bin/bundle exec unicorn -c config/unicorn.rb app/config.ru'
 Restart=on-failure
 RestartSec=3
 
